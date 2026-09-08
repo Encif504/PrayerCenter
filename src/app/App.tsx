@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { Menu, X, Phone, Mail, Facebook, MapPin, Clock, ChevronDown, ChevronUp, Star, Cross } from "lucide-react";
 
-// ─── Data ────────────────────────────────────────────────────────────────────
+// --- Data --------------------------------------------------------------------
 
 const NAV_LINKS = [
   { id: "home", label: "Home" },
@@ -27,7 +27,7 @@ const TESTIMONIALS = [
   {
     name: "Dr. Sarah Muthoni",
     location: "Kampala, Uganda",
-    text: "As an international visitor, I was warmly welcomed. The prayer mountain at sunset is breathtaking — truly a place where heaven meets earth.",
+    text: "As an international visitor, I was warmly welcomed. The prayer mountain at sunset is breathtaking - truly a place where heaven meets earth.",
     stars: 5,
   },
 ];
@@ -35,7 +35,7 @@ const TESTIMONIALS = [
 const SERVICES = [
   {
     tier: "VIP",
-    price: "2,500",
+    price: "250",
     description: "Private VIP room with dedicated prayer space, ensuite facilities, and premium amenities for a deeply focused retreat.",
     features: ["Private ensuite room", "Dedicated prayer chamber", "Priority access to Power Room", "Daily rate per person"],
     highlight: true,
@@ -50,7 +50,7 @@ const SERVICES = [
   {
     tier: "Regular",
     price: "500",
-    description: "Standard accommodation within the prayer compound — simple, clean, and purpose-built for focused prayer.",
+    description: "Standard accommodation within the prayer compound - simple, clean, and purpose-built for focused prayer.",
     features: ["Standard room allocation", "Access to all prayer areas", "Common facilities", "Daily rate per person"],
     highlight: false,
   },
@@ -107,23 +107,22 @@ const GALLERY_IMAGES: Record<string, { url: string; alt: string }[]> = {
   ],
 };
 
-// ─── Logo SVG ────────────────────────────────────────────────────────────────
+// --- Logo SVG ----------------------------------------------------------------
 
-function LogoMark({ size = 36, light = false }: { size?: number; light?: boolean }) {
-  const fg = light ? "#F7F2E9" : "#1C3A1C";
-  const gold = "#C49A3C";
+function LogoMark({ size = 36, light: _light = false }: { size?: number; light?: boolean }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Mountain */}
-      <path d="M2 30 L12 12 L18 20 L24 10 L34 30 Z" fill={fg} opacity="0.9" />
-      {/* Cross on summit */}
-      <rect x="22.5" y="4" width="3" height="12" rx="1" fill={gold} />
-      <rect x="19" y="7" width="10" height="3" rx="1" fill={gold} />
-    </svg>
+    <img
+      src="/images/logo.svg"
+      alt="House of Prayer logo"
+      width={size}
+      height={size}
+      className="object-contain"
+    />
   );
 }
 
-// ─── Navigation ──────────────────────────────────────────────────────────────
+
+// --- Navigation --------------------------------------------------------------
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -150,9 +149,9 @@ function Navbar() {
     <header
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: scrolled ? "rgba(28, 58, 28, 0.97)" : "transparent",
+        background: scrolled ? "rgba(0, 0, 0, 0.97)" : "transparent",
         backdropFilter: scrolled ? "blur(12px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(196,154,60,0.2)" : "none",
+        borderBottom: scrolled ? "1px solid rgba(151,55,189,0.2)" : "none",
       }}
     >
       <div className="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
@@ -162,12 +161,12 @@ function Navbar() {
           <div className="text-left">
             <div
               className="font-bold leading-tight tracking-wide text-sm"
-              style={{ fontFamily: "'Playfair Display', serif", color: "#F7F2E9", letterSpacing: "0.06em" }}
+              style={{ fontFamily: "'Playfair Display', serif", color: "#FFFFFF", letterSpacing: "0.06em" }}
             >
-              House of Prayer
+              All Nations Prayer
             </div>
-            <div className="text-xs tracking-widest uppercase" style={{ color: "#C49A3C", fontSize: "0.6rem" }}>
-              Bungoma · Kenya
+            <div className="text-xs tracking-widest uppercase" style={{ color: "#9737BD", fontSize: "0.8rem" }}>
+              Mountain of Zion
             </div>
           </div>
         </button>
@@ -181,10 +180,10 @@ function Navbar() {
               className="text-sm tracking-widest uppercase transition-colors duration-200"
               style={{
                 fontFamily: "'DM Sans', sans-serif",
-                color: active === link.id ? "#C49A3C" : "rgba(247,242,233,0.85)",
+                color: active === link.id ? "#9737BD" : "rgba(255,255,255,0.85)",
                 fontWeight: active === link.id ? 600 : 400,
                 letterSpacing: "0.1em",
-                borderBottom: active === link.id ? "1px solid #C49A3C" : "1px solid transparent",
+                borderBottom: active === link.id ? "1px solid #9737BD" : "1px solid transparent",
                 paddingBottom: "2px",
               }}
             >
@@ -196,7 +195,7 @@ function Navbar() {
         {/* Mobile toggle */}
         <button
           className="md:hidden p-2 rounded"
-          style={{ color: "#F7F2E9" }}
+          style={{ color: "#FFFFFF" }}
           onClick={() => setOpen(!open)}
           aria-label="Toggle navigation"
         >
@@ -208,7 +207,7 @@ function Navbar() {
       {open && (
         <div
           className="md:hidden border-t"
-          style={{ background: "rgba(28, 58, 28, 0.98)", borderColor: "rgba(196,154,60,0.2)" }}
+          style={{ background: "rgba(0, 0, 0, 0.98)", borderColor: "rgba(151,55,189,0.2)" }}
         >
           {NAV_LINKS.map((link) => (
             <button
@@ -217,7 +216,7 @@ function Navbar() {
               className="block w-full text-left px-6 py-4 text-sm tracking-widest uppercase border-b transition-colors"
               style={{
                 fontFamily: "'DM Sans', sans-serif",
-                color: active === link.id ? "#C49A3C" : "rgba(247,242,233,0.85)",
+                color: active === link.id ? "#9737BD" : "rgba(255,255,255,0.85)",
                 borderColor: "rgba(196,154,60,0.1)",
                 letterSpacing: "0.1em",
               }}
@@ -231,7 +230,7 @@ function Navbar() {
   );
 }
 
-// ─── Hero Section ────────────────────────────────────────────────────────────
+// --- Hero Section ------------------------------------------------------------
 
 function HeroSection() {
   return (
@@ -256,13 +255,8 @@ function HeroSection() {
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-3xl mx-auto flex flex-col items-center">
         <div className="mb-6 flex flex-col items-center gap-3">
-          <LogoMark size={56} light />
-          <span
-            className="text-xs tracking-[0.3em] uppercase"
-            style={{ color: "#C49A3C", fontFamily: "'DM Sans', sans-serif" }}
-          >
-            Established 2025 · Interdominational
-          </span>
+          
+         
         </div>
 
         <h1
@@ -271,8 +265,9 @@ function HeroSection() {
             fontFamily: "'Playfair Display', serif",
             fontSize: "clamp(2.4rem, 6vw, 4.2rem)",
             fontWeight: 600,
-            color: "#F7F2E9",
+            color: "#FFFFFF",
             lineHeight: 1.15,
+            paddingTop: "6rem",
           }}
         >
           Come Pray With Us
@@ -287,16 +282,17 @@ function HeroSection() {
             fontSize: "clamp(1rem, 2.5vw, 1.3rem)",
           }}
         >
-          A destination for your prayer
+          "My house shall be called a house of prayer." - Isaiah 56:7
         </p>
 
-        <div className="my-6 w-16 h-px" style={{ background: "#C49A3C" }} />
+        <div className="my-6 w-16 h-px" style={{ background: "#9737BD" }} />
 
         <p
           className="max-w-xl text-base leading-relaxed"
-          style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(247,242,233,0.72)", lineHeight: 1.8 }}
+          style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.72)", lineHeight: 1.8 }}
         >
-          A sacred place of fasting and prayer nestled in the hills of Bungoma, Kenya. Whether for one day or many, the door is open.
+          A sacred place of fasting and prayer, set in the peaceful surroundings of Bungoma, Kenya. Whether you come for one day or many, the door is open. A peaceful place to seek God, draw closer to Him, and find new strength in His presence.
+
         </p>
 
         <div className="mt-10 flex flex-wrap gap-4 justify-center">
@@ -305,8 +301,8 @@ function HeroSection() {
             className="px-8 py-3 text-sm tracking-widest uppercase transition-all duration-200 hover:scale-105"
             style={{
               fontFamily: "'DM Sans', sans-serif",
-              background: "#C49A3C",
-              color: "#1C2B1C",
+              background: "#9737BD",
+              color: "#000000",
               fontWeight: 600,
               letterSpacing: "0.12em",
               borderRadius: "2px",
@@ -331,7 +327,7 @@ function HeroSection() {
         </div>
 
         {/* Scroll cue */}
-        <div className="mt-16 animate-bounce opacity-50" style={{ color: "#C49A3C" }}>
+        <div className="mt-16 animate-bounce opacity-50" style={{ color: "#9737BD" }}>
           <ChevronDown size={24} />
         </div>
       </div>
@@ -339,23 +335,23 @@ function HeroSection() {
   );
 }
 
-// ─── Stats Bar ───────────────────────────────────────────────────────────────
+// --- Stats Bar ---------------------------------------------------------------
 
 function StatsBar() {
   const stats = [
-    { value: "300+", label: "Monthly Guests" },
-    { value: "Intl.", label: "Visitors Welcome" },
-    { value: "6am–8pm", label: "Daily Hours" },
-    { value: "From 500", label: "KSh per Day" },
+    { value: "100+", label: "Monthly Guests" },
+    { value: "7am-8pm", label: "Daily Hours" },
+    { value: "From 200", label: "KSh per Day" },
+    {value: "Interdenominational", label: "Open to All christians" }
   ];
   return (
-    <div style={{ background: "#1C3A1C" }}>
+    <div style={{ background: "#000000" }}>
       <div className="max-w-6xl mx-auto px-5 py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
         {stats.map((s) => (
           <div key={s.label} className="text-center">
             <div
               className="text-2xl font-bold mb-1"
-              style={{ fontFamily: "'Playfair Display', serif", color: "#C49A3C" }}
+              style={{ fontFamily: "'Playfair Display', serif", color: "#9737BD" }}
             >
               {s.value}
             </div>
@@ -372,24 +368,24 @@ function StatsBar() {
   );
 }
 
-// ─── About Section ───────────────────────────────────────────────────────────
+// --- About Section -----------------------------------------------------------
 
 function AboutSection() {
   return (
-    <section id="about" className="py-24 px-5" style={{ background: "#F7F2E9" }}>
+    <section id="about" className="py-24 px-5" style={{ background: "#FFFFFF" }}>
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Image */}
-          <div className="relative">
+          <div className="relative overflow-hidden" style={{ borderRadius: "2px" }}>
             <div
-              className="absolute -top-4 -left-4 w-full h-full"
-              style={{ border: "2px solid #C49A3C", borderRadius: "2px", opacity: 0.35 }}
+              className="absolute -top-1 -left-1 w-full h-full"
+              style={{ border: "2px solid #9737BD", borderRadius: "2px", opacity: 0.35 }}
             />
             <img
-              src="https://images.unsplash.com/photo-1535338881181-3646e5ab2ee2?w=700&h=500&fit=crop&auto=format"
+              src="/images/prayercentre.jpg"
               alt="Green mountain hills at House of Prayer, Bungoma"
-              className="w-full object-cover"
-              style={{ borderRadius: "2px", aspectRatio: "4/3" }}
+              className="w-full object-cover slow-zoom"
+              style={{ aspectRatio: "4/3" }}
             />
           </div>
 
@@ -397,7 +393,7 @@ function AboutSection() {
           <div>
             <p
               className="text-xs tracking-[0.25em] uppercase mb-4"
-              style={{ fontFamily: "'DM Sans', sans-serif", color: "#C49A3C" }}
+              style={{ fontFamily: "'DM Sans', sans-serif", color: "#9737BD" }}
             >
               Who We Are
             </p>
@@ -406,51 +402,43 @@ function AboutSection() {
               style={{
                 fontFamily: "'Playfair Display', serif",
                 fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
-                color: "#1C2B1C",
+                color: "#000000",
                 fontWeight: 600,
               }}
             >
               A Place Set Apart for{" "}
-              <em style={{ fontStyle: "italic", color: "#1C3A1C" }}>Prayer & Fasting</em>
+              <em style={{ fontStyle: "italic", color: "#000000" }}>Prayer & Fasting</em>
             </h2>
-            <div className="w-10 h-0.5 mb-6" style={{ background: "#C49A3C" }} />
+            <div className="w-10 h-0.5 mb-6" style={{ background: "#9737BD" }} />
             <p
               className="leading-relaxed mb-5 text-base"
-              style={{ fontFamily: "'DM Sans', sans-serif", color: "#4A4030", lineHeight: 1.85 }}
+              style={{ fontFamily: "'DM Sans', sans-serif", color: "#2B2B2B", lineHeight: 1.85 }}
             >
-              Founded in 2025, House of Prayer stands at the border of Bungoma and Kakamega counties — a quiet hillside sanctuary where Christians of all denominations come to seek the face of God. We are interdenominational, welcoming every believer regardless of their church background.
+             Founded in 2023, House of Prayer is a peaceful place of fasting and prayer, located near Frag Grannada Farm in Bungoma, Kenya. Here, Christians from all denominations come together to seek God, pray, and grow closer to Him.
+             
+
             </p>
             <p
               className="leading-relaxed mb-8 text-base"
-              style={{ fontFamily: "'DM Sans', sans-serif", color: "#4A4030", lineHeight: 1.85 }}
+              style={{ fontFamily: "'DM Sans', sans-serif", color: "#2B2B2B", lineHeight: 1.85 }}
             >
-              Our grounds are carefully maintained to preserve an atmosphere of holiness and stillness. Whether you come for one day or an extended fast, you will find peace, provision, and the presence of God.
+              Our grounds are carefully maintained to preserve an atmosphere of holiness and stillness.  Whether you come for a day or stay longer, there is a place for you here. Come, seek God, find peace, and renew your faith.
             </p>
 
             {/* Board & Partners */}
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-4" style={{ background: "#EDE6D3", borderRadius: "2px", borderLeft: "3px solid #C49A3C" }}>
+              <div className="p-4" style={{ background: "#F3E8F7", borderRadius: "2px", borderLeft: "3px solid #9737BD" }}>
                 <div
                   className="text-xs uppercase tracking-widest mb-1"
-                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#6B6050" }}
+                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#5A5A5A" }}
                 >
                   Governance
                 </div>
-                <div style={{ fontFamily: "'Playfair Display', serif", color: "#1C2B1C", fontWeight: 600 }}>
+                <div style={{ fontFamily: "'Playfair Display', serif", color: "#000000", fontWeight: 600 }}>
                   Board of Management
                 </div>
               </div>
-              <div className="p-4" style={{ background: "#EDE6D3", borderRadius: "2px", borderLeft: "3px solid #C49A3C" }}>
-                <div
-                  className="text-xs uppercase tracking-widest mb-1"
-                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#6B6050" }}
-                >
-                  Partners
-                </div>
-                <div style={{ fontFamily: "'Playfair Display', serif", color: "#1C2B1C", fontWeight: 600 }}>
-                  MBCI
-                </div>
-              </div>
+              
             </div>
           </div>
         </div>
@@ -460,13 +448,13 @@ function AboutSection() {
           <div className="text-center mb-10">
             <p
               className="text-xs tracking-[0.25em] uppercase mb-3"
-              style={{ fontFamily: "'DM Sans', sans-serif", color: "#C49A3C" }}
+              style={{ fontFamily: "'DM Sans', sans-serif", color: "#9737BD" }}
             >
               Compound Guidelines
             </p>
             <h3
               className="text-2xl"
-              style={{ fontFamily: "'Playfair Display', serif", color: "#1C2B1C", fontWeight: 600 }}
+              style={{ fontFamily: "'Playfair Display', serif", color: "#000000", fontWeight: 600 }}
             >
               Regulations for All Guests
             </h3>
@@ -476,17 +464,17 @@ function AboutSection() {
               <div
                 key={i}
                 className="flex items-start gap-3 p-4"
-                style={{ background: "#FDFAF3", borderRadius: "2px", border: "1px solid rgba(28,43,28,0.1)" }}
+                style={{ background: "#FFFFFF", borderRadius: "2px", border: "1px solid rgba(0,0,0,0.1)" }}
               >
                 <span
                   className="mt-1 text-xs font-bold shrink-0 w-5 h-5 flex items-center justify-center rounded-full"
-                  style={{ background: "#1C3A1C", color: "#C49A3C", fontFamily: "'DM Sans', sans-serif" }}
+                  style={{ background: "#000000", color: "#9737BD", fontFamily: "'DM Sans', sans-serif" }}
                 >
                   {i + 1}
                 </span>
                 <p
                   className="text-sm leading-relaxed"
-                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#4A4030", lineHeight: 1.7 }}
+                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#2B2B2B", lineHeight: 1.7 }}
                 >
                   {rule}
                 </p>
@@ -499,14 +487,14 @@ function AboutSection() {
   );
 }
 
-// ─── Testimonials ────────────────────────────────────────────────────────────
+// --- Testimonials ------------------------------------------------------------
 
 function TestimonialsSection() {
   return (
     <section
       className="py-24 px-5 relative overflow-hidden"
       style={{
-        background: "#1C3A1C",
+        background: "#000000",
         backgroundImage: `url('https://images.unsplash.com/photo-1615963519626-156298ea17ae?w=1400&h=600&fit=crop&auto=format')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -520,13 +508,13 @@ function TestimonialsSection() {
         <div className="text-center mb-12">
           <p
             className="text-xs tracking-[0.25em] uppercase mb-3"
-            style={{ fontFamily: "'DM Sans', sans-serif", color: "#C49A3C" }}
+            style={{ fontFamily: "'DM Sans', sans-serif", color: "#9737BD" }}
           >
             Testimonies
           </p>
           <h2
             className="text-3xl"
-            style={{ fontFamily: "'Playfair Display', serif", color: "#F7F2E9", fontWeight: 600 }}
+            style={{ fontFamily: "'Playfair Display', serif", color: "#FFFFFF", fontWeight: 600 }}
           >
             What Guests Say
           </h2>
@@ -546,7 +534,7 @@ function TestimonialsSection() {
               {/* Stars */}
               <div className="flex gap-1">
                 {Array.from({ length: t.stars }).map((_, i) => (
-                  <Star key={i} size={13} fill="#C49A3C" color="#C49A3C" />
+                  <Star key={i} size={13} fill="#9737BD" color="#9737BD" />
                 ))}
               </div>
               <p
@@ -563,13 +551,13 @@ function TestimonialsSection() {
               <div>
                 <div
                   className="font-semibold text-sm"
-                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#F7F2E9" }}
+                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#FFFFFF" }}
                 >
                   {t.name}
                 </div>
                 <div
                   className="text-xs mt-0.5"
-                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#C49A3C" }}
+                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#9737BD" }}
                 >
                   {t.location}
                 </div>
@@ -585,9 +573,9 @@ function TestimonialsSection() {
         >
           <p
             className="text-sm"
-            style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(247,242,233,0.8)", lineHeight: 1.7 }}
+            style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.8)", lineHeight: 1.7 }}
           >
-            <span style={{ color: "#C49A3C", fontWeight: 600 }}>Donations are welcome</span> and accepted at the site. Your generosity helps us maintain this sacred space for all who come to seek God.
+            <span style={{ color: "#9737BD", fontWeight: 600 }}>Donations are welcome</span> and accepted at the site. Your generosity helps us maintain this sacred space for all who come to seek God.
           </p>
         </div>
       </div>
@@ -595,30 +583,30 @@ function TestimonialsSection() {
   );
 }
 
-// ─── Services Section ────────────────────────────────────────────────────────
+// --- Services Section --------------------------------------------------------
 
 function ServicesSection() {
   return (
-    <section id="services" className="py-24 px-5" style={{ background: "#F7F2E9" }}>
+    <section id="services" className="py-24 px-5" style={{ background: "#FFFFFF" }}>
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
           <p
             className="text-xs tracking-[0.25em] uppercase mb-3"
-            style={{ fontFamily: "'DM Sans', sans-serif", color: "#C49A3C" }}
+            style={{ fontFamily: "'DM Sans', sans-serif", color: "#9737BD" }}
           >
             Accommodation & Pricing
           </p>
           <h2
             className="text-3xl mb-4"
-            style={{ fontFamily: "'Playfair Display', serif", color: "#1C2B1C", fontWeight: 600 }}
+            style={{ fontFamily: "'Playfair Display', serif", color: "#000000", fontWeight: 600 }}
           >
             Choose Your Stay
           </h2>
           <p
             className="max-w-lg mx-auto text-sm"
-            style={{ fontFamily: "'DM Sans', sans-serif", color: "#6B6050", lineHeight: 1.8 }}
+            style={{ fontFamily: "'DM Sans', sans-serif", color: "#5A5A5A", lineHeight: 1.8 }}
           >
-            All rates are per person per day. Minimum stay is one day — you may extend as long as you need.
+            All rates are per person per day. Minimum stay is one day - you may extend as long as you need.
           </p>
         </div>
 
@@ -628,7 +616,7 @@ function ServicesSection() {
               key={s.tier}
               className="relative flex flex-col p-8 transition-transform duration-200 hover:-translate-y-1"
               style={{
-                background: s.highlight ? "#1C3A1C" : "#FDFAF3",
+                background: s.highlight ? "#000000" : "#FFFFFF",
                 border: s.highlight ? "none" : "1px solid rgba(28,43,28,0.12)",
                 borderRadius: "2px",
               }}
@@ -637,8 +625,8 @@ function ServicesSection() {
                 <div
                   className="absolute top-0 left-0 right-0 text-center py-1 text-xs tracking-widest uppercase"
                   style={{
-                    background: "#C49A3C",
-                    color: "#1C2B1C",
+                    background: "#9737BD",
+                    color: "#000000",
                     fontFamily: "'DM Sans', sans-serif",
                     fontWeight: 600,
                     letterSpacing: "0.15em",
@@ -652,7 +640,7 @@ function ServicesSection() {
                   className="text-xl font-semibold mb-2"
                   style={{
                     fontFamily: "'Playfair Display', serif",
-                    color: s.highlight ? "#F7F2E9" : "#1C2B1C",
+                    color: s.highlight ? "#FFFFFF" : "#000000",
                   }}
                 >
                   {s.tier}
@@ -660,13 +648,13 @@ function ServicesSection() {
                 <div className="flex items-baseline gap-1 mb-4">
                   <span
                     className="text-3xl font-bold"
-                    style={{ fontFamily: "'Playfair Display', serif", color: "#C49A3C" }}
+                    style={{ fontFamily: "'Playfair Display', serif", color: "#9737BD" }}
                   >
                     KSh {s.price}
                   </span>
                   <span
                     className="text-xs"
-                    style={{ fontFamily: "'DM Sans', sans-serif", color: s.highlight ? "rgba(247,242,233,0.55)" : "#6B6050" }}
+                    style={{ fontFamily: "'DM Sans', sans-serif", color: s.highlight ? "rgba(255,255,255,0.55)" : "#5A5A5A" }}
                   >
                     / day
                   </span>
@@ -675,21 +663,21 @@ function ServicesSection() {
                   className="text-sm leading-relaxed mb-6"
                   style={{
                     fontFamily: "'DM Sans', sans-serif",
-                    color: s.highlight ? "rgba(247,242,233,0.72)" : "#4A4030",
+                    color: s.highlight ? "rgba(255,255,255,0.72)" : "#2B2B2B",
                     lineHeight: 1.75,
                   }}
                 >
                   {s.description}
                 </p>
-                <div className="border-t mb-6" style={{ borderColor: s.highlight ? "rgba(196,154,60,0.2)" : "rgba(28,43,28,0.1)" }} />
+                <div className="border-t mb-6" style={{ borderColor: s.highlight ? "rgba(151,55,189,0.2)" : "rgba(0,0,0,0.1)" }} />
                 <ul className="flex flex-col gap-3">
                   {s.features.map((f) => (
                     <li key={f} className="flex items-center gap-2 text-sm">
-                      <span style={{ color: "#C49A3C", fontSize: "1rem", lineHeight: 1 }}>✦</span>
+                      <span style={{ color: "#9737BD", fontSize: "1rem", lineHeight: 1 }}>*</span>
                       <span
                         style={{
                           fontFamily: "'DM Sans', sans-serif",
-                          color: s.highlight ? "rgba(247,242,233,0.8)" : "#4A4030",
+                          color: s.highlight ? "rgba(255,255,255,0.8)" : "#2B2B2B",
                         }}
                       >
                         {f}
@@ -705,27 +693,27 @@ function ServicesSection() {
         {/* Hours */}
         <div
           className="mt-12 p-6 flex flex-col sm:flex-row items-center gap-4 justify-center"
-          style={{ background: "#EDE6D3", borderRadius: "2px" }}
+          style={{ background: "#F3E8F7", borderRadius: "2px" }}
         >
-          <Clock size={20} style={{ color: "#C49A3C" }} />
+          <Clock size={20} style={{ color: "#9737BD" }} />
           <div className="text-center sm:text-left">
             <span
               className="font-semibold text-sm mr-2"
-              style={{ fontFamily: "'DM Sans', sans-serif", color: "#1C2B1C" }}
+              style={{ fontFamily: "'DM Sans', sans-serif", color: "#000000" }}
             >
               Operating Hours:
             </span>
             <span
               className="text-sm"
-              style={{ fontFamily: "'Playfair Display', serif", color: "#4A4030", fontStyle: "italic" }}
+              style={{ fontFamily: "'Playfair Display', serif", color: "#2B2B2B", fontStyle: "italic" }}
             >
-              6:00 AM – 8:00 PM daily
+              6:00 AM - 8:00 PM daily
             </span>
           </div>
           <div className="hidden sm:block h-5 w-px" style={{ background: "rgba(28,43,28,0.2)" }} />
           <p
             className="text-xs text-center sm:text-left"
-            style={{ fontFamily: "'DM Sans', sans-serif", color: "#6B6050" }}
+            style={{ fontFamily: "'DM Sans', sans-serif", color: "#5A5A5A" }}
           >
             Gate closes at 8 PM. Please plan your arrival accordingly.
           </p>
@@ -735,24 +723,24 @@ function ServicesSection() {
   );
 }
 
-// ─── Gallery Section ─────────────────────────────────────────────────────────
+// --- Gallery Section ---------------------------------------------------------
 
 function GallerySection() {
   const [activeTab, setActiveTab] = useState("exterior");
 
   return (
-    <section id="gallery" className="py-24 px-5" style={{ background: "#EDE6D3" }}>
+    <section id="gallery" className="py-24 px-5" style={{ background: "#F3E8F7" }}>
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <p
             className="text-xs tracking-[0.25em] uppercase mb-3"
-            style={{ fontFamily: "'DM Sans', sans-serif", color: "#C49A3C" }}
+            style={{ fontFamily: "'DM Sans', sans-serif", color: "#9737BD" }}
           >
             Gallery
           </p>
           <h2
             className="text-3xl"
-            style={{ fontFamily: "'Playfair Display', serif", color: "#1C2B1C", fontWeight: 600 }}
+            style={{ fontFamily: "'Playfair Display', serif", color: "#000000", fontWeight: 600 }}
           >
             Inside the Grounds
           </h2>
@@ -769,8 +757,8 @@ function GallerySection() {
                 fontFamily: "'DM Sans', sans-serif",
                 fontWeight: 500,
                 letterSpacing: "0.1em",
-                background: activeTab === cat.id ? "#1C3A1C" : "rgba(28,43,28,0.06)",
-                color: activeTab === cat.id ? "#F7F2E9" : "#4A4030",
+                background: activeTab === cat.id ? "#000000" : "rgba(0,0,0,0.06)",
+                color: activeTab === cat.id ? "#FFFFFF" : "#2B2B2B",
                 borderRadius: "2px",
                 border: activeTab === cat.id ? "none" : "1px solid rgba(28,43,28,0.15)",
               }}
@@ -786,7 +774,7 @@ function GallerySection() {
             <div
               key={i}
               className="overflow-hidden group"
-              style={{ borderRadius: "2px", background: "#C8BFA8" }}
+              style={{ borderRadius: "2px", background: "#D8D8D8" }}
             >
               <img
                 src={img.url}
@@ -800,7 +788,7 @@ function GallerySection() {
         {(GALLERY_IMAGES[activeTab] || []).length === 0 && (
           <div
             className="text-center py-16"
-            style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: "#6B6050" }}
+            style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: "#5A5A5A" }}
           >
             Photos coming soon.
           </div>
@@ -810,22 +798,22 @@ function GallerySection() {
   );
 }
 
-// ─── Contact Section ─────────────────────────────────────────────────────────
+// --- Contact Section ---------------------------------------------------------
 
 function ContactSection() {
   return (
-    <section id="contact" className="py-24 px-5" style={{ background: "#F7F2E9" }}>
+    <section id="contact" className="py-24 px-5" style={{ background: "#FFFFFF" }}>
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-14">
           <p
             className="text-xs tracking-[0.25em] uppercase mb-3"
-            style={{ fontFamily: "'DM Sans', sans-serif", color: "#C49A3C" }}
+            style={{ fontFamily: "'DM Sans', sans-serif", color: "#9737BD" }}
           >
             Get in Touch
           </p>
           <h2
             className="text-3xl"
-            style={{ fontFamily: "'Playfair Display', serif", color: "#1C2B1C", fontWeight: 600 }}
+            style={{ fontFamily: "'Playfair Display', serif", color: "#000000", fontWeight: 600 }}
           >
             Find Us
           </h2>
@@ -838,24 +826,24 @@ function ContactSection() {
             <a
               href="tel:+254712345678"
               className="flex items-start gap-4 p-6 transition-transform duration-200 hover:-translate-y-0.5"
-              style={{ background: "#FDFAF3", borderRadius: "2px", border: "1px solid rgba(28,43,28,0.1)", textDecoration: "none" }}
+              style={{ background: "#FFFFFF", borderRadius: "2px", border: "1px solid rgba(0,0,0,0.1)", textDecoration: "none" }}
             >
               <div
                 className="w-10 h-10 flex items-center justify-center shrink-0"
-                style={{ background: "#1C3A1C", borderRadius: "2px" }}
+                style={{ background: "#000000", borderRadius: "2px" }}
               >
-                <Phone size={16} color="#C49A3C" />
+                <Phone size={16} color="#9737BD" />
               </div>
               <div>
                 <div
                   className="text-xs uppercase tracking-widest mb-1"
-                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#6B6050" }}
+                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#5A5A5A" }}
                 >
                   Phone
                 </div>
                 <div
                   className="font-medium"
-                  style={{ fontFamily: "'Playfair Display', serif", color: "#1C2B1C" }}
+                  style={{ fontFamily: "'Playfair Display', serif", color: "#000000" }}
                 >
                   +254 712 345 678
                 </div>
@@ -866,24 +854,24 @@ function ContactSection() {
             <a
               href="mailto:houseofprayer@gmail.com"
               className="flex items-start gap-4 p-6 transition-transform duration-200 hover:-translate-y-0.5"
-              style={{ background: "#FDFAF3", borderRadius: "2px", border: "1px solid rgba(28,43,28,0.1)", textDecoration: "none" }}
+              style={{ background: "#FFFFFF", borderRadius: "2px", border: "1px solid rgba(0,0,0,0.1)", textDecoration: "none" }}
             >
               <div
                 className="w-10 h-10 flex items-center justify-center shrink-0"
-                style={{ background: "#1C3A1C", borderRadius: "2px" }}
+                style={{ background: "#000000", borderRadius: "2px" }}
               >
-                <Mail size={16} color="#C49A3C" />
+                <Mail size={16} color="#9737BD" />
               </div>
               <div>
                 <div
                   className="text-xs uppercase tracking-widest mb-1"
-                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#6B6050" }}
+                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#5A5A5A" }}
                 >
                   Email
                 </div>
                 <div
                   className="font-medium"
-                  style={{ fontFamily: "'Playfair Display', serif", color: "#1C2B1C" }}
+                  style={{ fontFamily: "'Playfair Display', serif", color: "#000000" }}
                 >
                   houseofprayer@gmail.com
                 </div>
@@ -894,26 +882,26 @@ function ContactSection() {
             <a
               href="#"
               className="flex items-start gap-4 p-6 transition-transform duration-200 hover:-translate-y-0.5"
-              style={{ background: "#FDFAF3", borderRadius: "2px", border: "1px solid rgba(28,43,28,0.1)", textDecoration: "none" }}
+              style={{ background: "#FFFFFF", borderRadius: "2px", border: "1px solid rgba(0,0,0,0.1)", textDecoration: "none" }}
             >
               <div
                 className="w-10 h-10 flex items-center justify-center shrink-0"
-                style={{ background: "#1C3A1C", borderRadius: "2px" }}
+                style={{ background: "#000000", borderRadius: "2px" }}
               >
-                <Facebook size={16} color="#C49A3C" />
+                <Facebook size={16} color="#9737BD" />
               </div>
               <div>
                 <div
                   className="text-xs uppercase tracking-widest mb-1"
-                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#6B6050" }}
+                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#5A5A5A" }}
                 >
                   Facebook
                 </div>
                 <div
                   className="font-medium"
-                  style={{ fontFamily: "'Playfair Display', serif", color: "#1C2B1C" }}
+                  style={{ fontFamily: "'Playfair Display', serif", color: "#000000" }}
                 >
-                  House of Prayer — Official Page
+                  House of Prayer - Official Page
                 </div>
               </div>
             </a>
@@ -921,26 +909,26 @@ function ContactSection() {
             {/* Location */}
             <div
               className="flex items-start gap-4 p-6"
-              style={{ background: "#FDFAF3", borderRadius: "2px", border: "1px solid rgba(28,43,28,0.1)" }}
+              style={{ background: "#FFFFFF", borderRadius: "2px", border: "1px solid rgba(0,0,0,0.1)" }}
             >
               <div
                 className="w-10 h-10 flex items-center justify-center shrink-0"
-                style={{ background: "#1C3A1C", borderRadius: "2px" }}
+                style={{ background: "#000000", borderRadius: "2px" }}
               >
-                <MapPin size={16} color="#C49A3C" />
+                <MapPin size={16} color="#9737BD" />
               </div>
               <div>
                 <div
                   className="text-xs uppercase tracking-widest mb-1"
-                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#6B6050" }}
+                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#5A5A5A" }}
                 >
                   Location
                 </div>
                 <div
                   className="font-medium"
-                  style={{ fontFamily: "'Playfair Display', serif", color: "#1C2B1C" }}
+                  style={{ fontFamily: "'Playfair Display', serif", color: "#000000" }}
                 >
-                  Bungoma – Kakamega County Border, Kenya
+                  Bungoma - Kakamega County Border, Kenya
                 </div>
               </div>
             </div>
@@ -953,19 +941,19 @@ function ContactSection() {
           >
             <div
               className="flex-1 flex flex-col items-center justify-center gap-4 p-10 text-center"
-              style={{ background: "#EDE6D3" }}
+              style={{ background: "#F3E8F7" }}
             >
-              <MapPin size={36} style={{ color: "#C49A3C" }} />
+              <MapPin size={36} style={{ color: "#9737BD" }} />
               <div>
                 <p
                   className="font-semibold text-lg mb-1"
-                  style={{ fontFamily: "'Playfair Display', serif", color: "#1C2B1C" }}
+                  style={{ fontFamily: "'Playfair Display', serif", color: "#000000" }}
                 >
                   Google Maps
                 </p>
                 <p
                   className="text-sm"
-                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#6B6050", lineHeight: 1.7 }}
+                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#5A5A5A", lineHeight: 1.7 }}
                 >
                   Interactive map will be embedded here once coordinates are confirmed.
                 </p>
@@ -977,8 +965,8 @@ function ContactSection() {
                 className="px-6 py-2.5 text-xs tracking-widest uppercase transition-all duration-200 hover:opacity-80"
                 style={{
                   fontFamily: "'DM Sans', sans-serif",
-                  background: "#1C3A1C",
-                  color: "#F7F2E9",
+                  background: "#000000",
+                  color: "#FFFFFF",
                   fontWeight: 500,
                   letterSpacing: "0.12em",
                   borderRadius: "2px",
@@ -995,7 +983,7 @@ function ContactSection() {
   );
 }
 
-// ─── Footer ───────────────────────────────────────────────────────────────────
+// --- Footer -------------------------------------------------------------------
 
 function Footer() {
   return (
@@ -1008,7 +996,7 @@ function Footer() {
               <LogoMark size={32} light />
               <span
                 className="font-bold"
-                style={{ fontFamily: "'Playfair Display', serif", color: "#F7F2E9", fontSize: "1rem" }}
+                style={{ fontFamily: "'Playfair Display', serif", color: "#FFFFFF", fontSize: "1rem" }}
               >
                 House of Prayer
               </span>
@@ -1017,7 +1005,7 @@ function Footer() {
               className="text-sm leading-relaxed"
               style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(247,242,233,0.5)", lineHeight: 1.8 }}
             >
-              An interdenominational prayer destination at the Bungoma–Kakamega border, Kenya. Open daily 6am–8pm.
+              An interdenominational prayer destination at the Bungoma-Kakamega border, Kenya. Open daily 6am-8pm.
             </p>
           </div>
 
@@ -1025,7 +1013,7 @@ function Footer() {
           <div>
             <h4
               className="text-xs tracking-widest uppercase mb-5"
-              style={{ fontFamily: "'DM Sans', sans-serif", color: "#C49A3C", letterSpacing: "0.15em" }}
+              style={{ fontFamily: "'DM Sans', sans-serif", color: "#9737BD", letterSpacing: "0.15em" }}
             >
               Navigation
             </h4>
@@ -1048,7 +1036,7 @@ function Footer() {
           <div>
             <h4
               className="text-xs tracking-widest uppercase mb-5"
-              style={{ fontFamily: "'DM Sans', sans-serif", color: "#C49A3C", letterSpacing: "0.15em" }}
+              style={{ fontFamily: "'DM Sans', sans-serif", color: "#9737BD", letterSpacing: "0.15em" }}
             >
               Contact
             </h4>
@@ -1057,22 +1045,22 @@ function Footer() {
                 className="flex items-center gap-2 text-sm"
                 style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(247,242,233,0.6)" }}
               >
-                <Phone size={13} style={{ color: "#C49A3C" }} />
+                <Phone size={13} style={{ color: "#9737BD" }} />
                 +254 712 345 678
               </li>
               <li
                 className="flex items-center gap-2 text-sm"
                 style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(247,242,233,0.6)" }}
               >
-                <Mail size={13} style={{ color: "#C49A3C" }} />
+                <Mail size={13} style={{ color: "#9737BD" }} />
                 houseofprayer@gmail.com
               </li>
               <li
                 className="flex items-center gap-2 text-sm"
                 style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(247,242,233,0.6)" }}
               >
-                <MapPin size={13} style={{ color: "#C49A3C" }} />
-                Bungoma–Kakamega, Kenya
+                <MapPin size={13} style={{ color: "#9737BD" }} />
+                Bungoma-Kakamega, Kenya
               </li>
             </ul>
           </div>
@@ -1086,13 +1074,13 @@ function Footer() {
             className="text-xs"
             style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(247,242,233,0.3)" }}
           >
-            © 2025 House of Prayer. All rights reserved.
+            (c) 2025 House of Prayer. All rights reserved.
           </p>
           <p
             className="text-xs italic"
             style={{ fontFamily: "'Playfair Display', serif", color: "rgba(196,154,60,0.45)" }}
           >
-            "My house shall be called a house of prayer." — Isaiah 56:7
+            "My house shall be called a house of prayer." - Isaiah 56:7
           </p>
         </div>
       </div>
@@ -1100,13 +1088,13 @@ function Footer() {
   );
 }
 
-// ─── App ──────────────────────────────────────────────────────────────────────
+// --- App ----------------------------------------------------------------------
 
 export default function App() {
   return (
     <div
       className="min-h-screen"
-      style={{ fontFamily: "'DM Sans', sans-serif", background: "#F7F2E9" }}
+      style={{ fontFamily: "'DM Sans', sans-serif", background: "#FFFFFF" }}
     >
       <Navbar />
       <HeroSection />
@@ -1120,3 +1108,5 @@ export default function App() {
     </div>
   );
 }
+
+
