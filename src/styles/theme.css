@@ -2,6 +2,11 @@
 
 :root {
   --font-size: 16px;
+  --page-bg: #ffffff;
+  --page-text: #000000;
+  --page-surface: #ffffff;
+  --page-muted: #f3e8f7;
+  --page-text-secondary: #2b2b2b;
   --background: #ffffff;
   --foreground: #000000;
   --card: #ffffff;
@@ -76,6 +81,133 @@
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #29202D;
   --sidebar-ring: #9737BD;
+}
+
+[data-theme="dark"] {
+  --page-bg: #10130f;
+  --page-text: #f7f2e9;
+  --page-surface: #171c18;
+  --page-muted: #211d25;
+  --page-text-secondary: #d9d4cc;
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+
+[data-theme="dark"] #about,
+[data-theme="dark"] #services,
+[data-theme="dark"] #contact {
+  background: var(--page-bg) !important;
+}
+
+[data-theme="dark"] #gallery {
+  background: var(--page-muted) !important;
+}
+
+[data-theme="dark"] #about h2,
+[data-theme="dark"] #about h3,
+[data-theme="dark"] #services h2,
+[data-theme="dark"] #services h3,
+[data-theme="dark"] #contact h2,
+[data-theme="dark"] #contact p,
+[data-theme="dark"] #about p,
+[data-theme="dark"] #services p {
+  color: var(--page-text) !important;
+}
+
+[data-theme="dark"] #about [style*="background"],
+[data-theme="dark"] #services [style*="background"],
+[data-theme="dark"] #contact [style*="background"] {
+  background: var(--page-surface) !important;
+}
+
+[data-theme="dark"] #about [style*="border"],
+[data-theme="dark"] #services [style*="border"],
+[data-theme="dark"] #contact [style*="border"] {
+  border-color: rgba(247, 242, 233, 0.16) !important;
+}
+
+[data-theme="dark"] #contact a,
+[data-theme="dark"] #contact a div,
+[data-theme="dark"] #contact a p {
+  color: var(--page-text) !important;
+}
+
+[data-theme="dark"] #about [style*="color: #000000"],
+[data-theme="dark"] #about [style*="color: rgb(0, 0, 0)"],
+[data-theme="dark"] #services [style*="color: #000000"],
+[data-theme="dark"] #services [style*="color: rgb(0, 0, 0)"],
+[data-theme="dark"] #contact [style*="color: #000000"],
+[data-theme="dark"] #contact [style*="color: rgb(0, 0, 0)"] {
+  color: var(--page-text) !important;
+}
+
+[data-theme="dark"] header [style*="color: #000000"],
+[data-theme="dark"] header [style*="color: rgb(0, 0, 0)"] {
+  color: var(--page-text) !important;
+}
+
+[data-theme="dark"] footer {
+  background: #0b0e0b !important;
+}
+
+@media (max-width: 639px) {
+  #about,
+  #services,
+  #gallery,
+  #contact {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important;
+  }
+
+  #home h1 {
+    padding-top: 4rem !important;
+    font-size: clamp(2.15rem, 11vw, 3.2rem) !important;
+  }
+
+  #home p {
+    font-size: 0.95rem !important;
+  }
+
+  #contact a,
+  #contact .font-medium {
+    overflow-wrap: anywhere;
+  }
+
+  #gallery button {
+    min-height: 2.75rem;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  #about,
+  #services,
+  #gallery,
+  #contact {
+    padding-top: 5.5rem;
+    padding-bottom: 5.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  #about,
+  #services,
+  #gallery,
+  #contact {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
 }
 
 @theme inline {

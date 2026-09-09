@@ -1,5 +1,5 @@
 ﻿import { useState, useEffect } from "react";
-import { Menu, X, Phone, Mail, Facebook, MapPin, Clock, ChevronDown, ChevronUp, Star, Cross } from "lucide-react";
+import { Menu, X, Phone, Mail, Facebook, MapPin, Clock, ChevronDown, ChevronUp, Star, Cross, Moon, Sun } from "lucide-react";
 
 // --- Data --------------------------------------------------------------------
 
@@ -36,70 +36,55 @@ const SERVICES = [
   {
     tier: "VIP",
     price: "250",
-    description: "Private VIP room with dedicated prayer space, ensuite facilities, and premium amenities for a deeply focused retreat.",
-    features: ["Private ensuite room", "Dedicated prayer chamber", "Priority access to Power Room", "Daily rate per person"],
+    description: "Private VIP spacious room with dedicated prayer space, ensuite facilities for a deeply focused retreat.",
+    features: ["Private ensuite room", "Dedicated prayer chamber", "Daily rate per person"],
     highlight: true,
   },
+
   {
-    tier: "Double Room",
-    price: "800",
-    description: "Comfortable shared room for two guests, ideal for couples or prayer partners seeking a joint retreat.",
-    features: ["Shared room for two", "Access to all common areas", "Full prayer grounds access", "Daily rate per person"],
-    highlight: false,
-  },
-  {
-    tier: "Regular",
-    price: "500",
+    tier: "Dormitory",
+    price: "200",
     description: "Standard accommodation within the prayer compound - simple, clean, and purpose-built for focused prayer.",
-    features: ["Standard room allocation", "Access to all prayer areas", "Common facilities", "Daily rate per person"],
+    features: ["Standard room allocation","shared rooms", "Access to all prayer areas", "Common facilities", "Daily rate per person"],
     highlight: false,
   },
 ];
 
 const REGULATIONS = [
-  "No eating within the premises",
+  "You're required to provide national ID, telephone,next of kin",
   "No making noise or creating disturbances",
-  "Enter only through the main gate",
+  "All visitors will be subjected through security inspection",
   "Do not preach within the compound",
-  "Maintain silence in all prayer areas",
   "Respect other guests' prayer time",
+  "Decent dressing while on the mountain at all times",
+  "We don't accept sick people. Seek medical services incase you are feeling well",
+  "Couples are not allowed to share a room",
 ];
 
 const GALLERY_CATEGORIES = [
   { id: "exterior", label: "Exterior" },
   { id: "reception", label: "Reception" },
   { id: "regular", label: "Regular Rooms" },
-  { id: "power", label: "Power Room" },
-  { id: "double", label: "Double Rooms" },
   { id: "vip", label: "VIP Rooms" },
   { id: "commissioning", label: "Commissioning" },
 ];
 
 const GALLERY_IMAGES: Record<string, { url: string; alt: string }[]> = {
   exterior: [
-    { url: "https://images.unsplash.com/photo-1535338881181-3646e5ab2ee2?w=600&h=400&fit=crop&auto=format", alt: "Aerial view of green mountains" },
-    { url: "https://images.unsplash.com/photo-1554490826-3645c4942797?w=600&h=400&fit=crop&auto=format", alt: "Hill landscape at the prayer ground" },
-    { url: "https://images.unsplash.com/photo-1604994227683-e7ea73825377?w=600&h=400&fit=crop&auto=format", alt: "Green grass field near mountain" },
+    { url: "/images/compound01.jpg", alt: "Hill landscape at the prayer ground" },
+    { url: "/images/compound02.jpg", alt: "Green grass field near mountain" },
   ],
   reception: [
-    { url: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&h=400&fit=crop&auto=format", alt: "Reception area" },
-    { url: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop&auto=format", alt: "Welcoming entrance" },
+    { url: "/images/reception.jpg", alt: "Reception area" },
+    { url: "/images/reception02.jpg", alt: "Welcoming entrance" },
   ],
   regular: [
-    { url: "https://images.unsplash.com/photo-1505693314120-0d443867891c?w=600&h=400&fit=crop&auto=format", alt: "Regular prayer room" },
-    { url: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=600&h=400&fit=crop&auto=format", alt: "Simple clean room" },
-  ],
-  power: [
-    { url: "https://images.unsplash.com/photo-1533000971552-6a962ff0b9f9?w=600&h=400&fit=crop&auto=format", alt: "Power prayer room interior" },
-    { url: "https://images.unsplash.com/photo-1609151376730-f246ec0b99f5?w=600&h=400&fit=crop&auto=format", alt: "Sanctuary prayer space" },
-  ],
-  double: [
-    { url: "https://images.unsplash.com/photo-1631049552057-403cdb8f0658?w=600&h=400&fit=crop&auto=format", alt: "Double room" },
-    { url: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=400&fit=crop&auto=format", alt: "Shared room for two" },
+    { url: "/images/regular01.jpg", alt: "Regular prayer room" },
+    { url: "/images/regular02.jpg", alt: "Simple clean room" },
   ],
   vip: [
-    { url: "https://images.unsplash.com/photo-1591088398332-8a7791972843?w=600&h=400&fit=crop&auto=format", alt: "VIP prayer suite" },
-    { url: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=600&h=400&fit=crop&auto=format", alt: "Premium VIP room" },
+    { url: "/images/vip01.jpg", alt: "VIP prayer suite" },
+    { url: "/images/vip02.jpg", alt: "Premium VIP room" },
   ],
   commissioning: [
     { url: "https://images.unsplash.com/photo-1532641422418-0418d1903a1d?w=600&h=400&fit=crop&auto=format", alt: "Commissioning service at sunset" },
@@ -124,7 +109,7 @@ function LogoMark({ size = 36, light: _light = false }: { size?: number; light?:
 
 // --- Navigation --------------------------------------------------------------
 
-function Navbar() {
+function Navbar({ darkMode, onToggleTheme }: { darkMode: boolean; onToggleTheme: () => void }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("home");
@@ -149,19 +134,19 @@ function Navbar() {
     <header
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: scrolled ? "rgba(0, 0, 0, 0.97)" : "transparent",
+        background: scrolled ? "rgba(40, 194, 78, 0.97)" : "transparent",
         backdropFilter: scrolled ? "blur(12px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(151,55,189,0.2)" : "none",
+        borderBottom: scrolled ? "1px solid rgba(0,0,0,0.2)" : "none",
       }}
     >
-      <div className="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between gap-4">
         {/* Logo */}
         <button onClick={() => scrollTo("home")} className="flex items-center gap-3 group">
           <LogoMark size={36} light />
           <div className="text-left">
             <div
               className="font-bold leading-tight tracking-wide text-sm"
-              style={{ fontFamily: "'Playfair Display', serif", color: "#FFFFFF", letterSpacing: "0.06em" }}
+              style={{ fontFamily: "'Playfair Display', serif", color: scrolled ? "#000000" : "#FFFFFF", letterSpacing: "0.06em" }}
             >
               All Nations Prayer
             </div>
@@ -180,10 +165,10 @@ function Navbar() {
               className="text-sm tracking-widest uppercase transition-colors duration-200"
               style={{
                 fontFamily: "'DM Sans', sans-serif",
-                color: active === link.id ? "#9737BD" : "rgba(255,255,255,0.85)",
+                color: scrolled ? "#000000" : active === link.id ? "#9737BD" : "rgba(255,255,255,0.85)",
                 fontWeight: active === link.id ? 600 : 400,
                 letterSpacing: "0.1em",
-                borderBottom: active === link.id ? "1px solid #9737BD" : "1px solid transparent",
+                borderBottom: active === link.id ? `1px solid ${scrolled ? "#000000" : "#9737BD"}` : "1px solid transparent",
                 paddingBottom: "2px",
               }}
             >
@@ -192,22 +177,35 @@ function Navbar() {
           ))}
         </nav>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden p-2 rounded"
-          style={{ color: "#FFFFFF" }}
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle navigation"
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            className="p-2 rounded transition-colors"
+            style={{ color: scrolled ? "#000000" : "#FFFFFF" }}
+            onClick={onToggleTheme}
+            aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+            aria-pressed={darkMode}
+            title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {darkMode ? <Sun size={19} /> : <Moon size={19} />}
+          </button>
+
+          {/* Mobile toggle */}
+          <button
+            className="md:hidden p-2 rounded"
+            style={{ color: scrolled ? "#000000" : "#FFFFFF" }}
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle navigation"
+          >
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
       {open && (
         <div
           className="md:hidden border-t"
-          style={{ background: "rgba(0, 0, 0, 0.98)", borderColor: "rgba(151,55,189,0.2)" }}
+          style={{ background: scrolled ? "rgba(40, 194, 68, 0.98)" : "rgba(0, 0, 0, 0.98)", borderColor: "rgba(0,0,0,0.2)" }}
         >
           {NAV_LINKS.map((link) => (
             <button
@@ -216,8 +214,8 @@ function Navbar() {
               className="block w-full text-left px-6 py-4 text-sm tracking-widest uppercase border-b transition-colors"
               style={{
                 fontFamily: "'DM Sans', sans-serif",
-                color: active === link.id ? "#9737BD" : "rgba(255,255,255,0.85)",
-                borderColor: "rgba(196,154,60,0.1)",
+                color: scrolled ? "#000000" : active === link.id ? "#9737BD" : "rgba(255,255,255,0.85)",
+                borderColor: "rgba(0,0,0,0.1)",
                 letterSpacing: "0.1em",
               }}
             >
@@ -265,7 +263,7 @@ function HeroSection() {
             fontFamily: "'Playfair Display', serif",
             fontSize: "clamp(2.4rem, 6vw, 4.2rem)",
             fontWeight: 600,
-            color: "#FFFFFF",
+            color: "#28C244",
             lineHeight: 1.15,
             paddingTop: "6rem",
           }}
@@ -278,7 +276,7 @@ function HeroSection() {
           style={{
             fontFamily: "'Playfair Display', serif",
             fontStyle: "italic",
-            color: "rgba(247,242,233,0.78)",
+            color: "#28C244",
             fontSize: "clamp(1rem, 2.5vw, 1.3rem)",
           }}
         >
@@ -575,7 +573,7 @@ function TestimonialsSection() {
             className="text-sm"
             style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.8)", lineHeight: 1.7 }}
           >
-            <span style={{ color: "#9737BD", fontWeight: 600 }}>Donations are welcome</span> and accepted at the site. Your generosity helps us maintain this sacred space for all who come to seek God.
+            <span style={{ color: "#9737BD", fontWeight: 600 }}>Donations are welcome</span> and accepted at the prayer centre. Your generosity helps us maintain this sacred space for all who come to seek God.
           </p>
         </div>
       </div>
@@ -606,7 +604,7 @@ function ServicesSection() {
             className="max-w-lg mx-auto text-sm"
             style={{ fontFamily: "'DM Sans', sans-serif", color: "#5A5A5A", lineHeight: 1.8 }}
           >
-            All rates are per person per day. Minimum stay is one day - you may extend as long as you need.
+            All rates are per person per day, you may extend as long as you need.
           </p>
         </div>
 
@@ -707,7 +705,7 @@ function ServicesSection() {
               className="text-sm"
               style={{ fontFamily: "'Playfair Display', serif", color: "#2B2B2B", fontStyle: "italic" }}
             >
-              6:00 AM - 8:00 PM daily
+              7:00 AM - 6:00 PM daily
             </span>
           </div>
           <div className="hidden sm:block h-5 w-px" style={{ background: "rgba(28,43,28,0.2)" }} />
@@ -845,7 +843,7 @@ function ContactSection() {
                   className="font-medium"
                   style={{ fontFamily: "'Playfair Display', serif", color: "#000000" }}
                 >
-                  +254 712 345 678
+                  +254 118 351 091
                 </div>
               </div>
             </a>
@@ -873,7 +871,7 @@ function ContactSection() {
                   className="font-medium"
                   style={{ fontFamily: "'Playfair Display', serif", color: "#000000" }}
                 >
-                  houseofprayer@gmail.com
+                  allnationsprayermountainofzion@gmail.com
                 </div>
               </div>
             </a>
@@ -928,7 +926,7 @@ function ContactSection() {
                   className="font-medium"
                   style={{ fontFamily: "'Playfair Display', serif", color: "#000000" }}
                 >
-                  Bungoma - Kakamega County Border, Kenya
+                  Bungoma-Kakamega County Border, next to Frag Grannada Farm, Kenya
                 </div>
               </div>
             </div>
@@ -987,7 +985,7 @@ function ContactSection() {
 
 function Footer() {
   return (
-    <footer style={{ background: "#111D11" }}>
+    <footer style={{ background: "#183d18" }}>
       <div className="max-w-6xl mx-auto px-5 py-14">
         <div className="grid md:grid-cols-3 gap-10 mb-12">
           {/* Brand */}
@@ -1046,21 +1044,21 @@ function Footer() {
                 style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(247,242,233,0.6)" }}
               >
                 <Phone size={13} style={{ color: "#9737BD" }} />
-                +254 712 345 678
+                +254 118 351 091
               </li>
               <li
                 className="flex items-center gap-2 text-sm"
                 style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(247,242,233,0.6)" }}
               >
                 <Mail size={13} style={{ color: "#9737BD" }} />
-                houseofprayer@gmail.com
+                allnationsprayermountainofzion@gmail.com
               </li>
               <li
                 className="flex items-center gap-2 text-sm"
                 style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(247,242,233,0.6)" }}
               >
                 <MapPin size={13} style={{ color: "#9737BD" }} />
-                Bungoma-Kakamega, Kenya
+                Next to Frag Grannada Farm
               </li>
             </ul>
           </div>
@@ -1074,7 +1072,7 @@ function Footer() {
             className="text-xs"
             style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(247,242,233,0.3)" }}
           >
-            (c) 2025 House of Prayer. All rights reserved.
+            (c) 2026 House of Prayer. All rights reserved.
           </p>
           <p
             className="text-xs italic"
@@ -1091,12 +1089,24 @@ function Footer() {
 // --- App ----------------------------------------------------------------------
 
 export default function App() {
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window === "undefined") return false;
+    const savedTheme = window.localStorage.getItem("prayer-center-theme");
+    return savedTheme ? savedTheme === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+  });
+
+  useEffect(() => {
+    document.documentElement.style.colorScheme = darkMode ? "dark" : "light";
+    window.localStorage.setItem("prayer-center-theme", darkMode ? "dark" : "light");
+  }, [darkMode]);
+
   return (
     <div
       className="min-h-screen"
-      style={{ fontFamily: "'DM Sans', sans-serif", background: "#FFFFFF" }}
+      data-theme={darkMode ? "dark" : "light"}
+      style={{ fontFamily: "'DM Sans', sans-serif", background: "var(--page-bg)", color: "var(--page-text)" }}
     >
-      <Navbar />
+      <Navbar darkMode={darkMode} onToggleTheme={() => setDarkMode((current) => !current)} />
       <HeroSection />
       <StatsBar />
       <AboutSection />
