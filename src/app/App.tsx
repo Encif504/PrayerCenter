@@ -94,7 +94,7 @@ const GALLERY_IMAGES: Record<string, { url: string; alt: string }[]> = {
 
 // --- Logo SVG ----------------------------------------------------------------
 
-function LogoMark({ size = 36, light: _light = false }: { size?: number; light?: boolean }) {
+function LogoMark({ size = 44, light: _light = false }: { size?: number; light?: boolean }) {
   return (
     <img
       src="/images/logo.svg"
@@ -932,32 +932,22 @@ function ContactSection() {
             </div>
           </div>
 
-          {/* Map placeholder */}
+          {/* Map */}
           <div
             className="flex flex-col overflow-hidden"
             style={{ borderRadius: "2px", border: "1px solid rgba(28,43,28,0.12)", minHeight: "380px" }}
           >
-            <div
-              className="flex-1 flex flex-col items-center justify-center gap-4 p-10 text-center"
-              style={{ background: "#F3E8F7" }}
-            >
-              <MapPin size={36} style={{ color: "#9737BD" }} />
-              <div>
-                <p
-                  className="font-semibold text-lg mb-1"
-                  style={{ fontFamily: "'Playfair Display', serif", color: "#000000" }}
-                >
-                  Google Maps
-                </p>
-                <p
-                  className="text-sm"
-                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#5A5A5A", lineHeight: 1.7 }}
-                >
-                  Interactive map will be embedded here once coordinates are confirmed.
-                </p>
-              </div>
+            <iframe
+              title="House of Prayer location map"
+              src="https://www.google.com/maps?q=0.453168,34.504474&z=14&output=embed"
+              className="w-full flex-1"
+              style={{ minHeight: "380px", border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+            <div className="flex justify-end p-4" style={{ background: "#F3E8F7" }}>
               <a
-                href="https://maps.google.com"
+                href="https://www.google.com/maps/search/?api=1&query=0.453168,34.504474"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-2.5 text-xs tracking-widest uppercase transition-all duration-200 hover:opacity-80"
