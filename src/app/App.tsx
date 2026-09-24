@@ -51,14 +51,45 @@ const SERVICES = [
 ];
 
 const REGULATIONS = [
-  "You're required to provide national ID, telephone,next of kin",
-  "No making noise or creating disturbances",
-  "All visitors will be subjected through security inspection",
-  "Do not preach within the compound",
-  "Respect other guests' prayer time",
-  "Decent dressing while on the mountain at all times",
-  "We don't accept sick people. Seek medical services incase you are feeling well",
-  "Couples are not allowed to share a room",
+  {
+    heading: "Registration and Security",
+    rules: [
+      "Registration details: You are required to provide your national ID, phone number, and next-of-kin contact details at the registration desk.",
+      "Room security: You are required to lock your room whenever you leave the premises, however briefly, and lock it upon your return.",
+      "Check-out hours: For security reasons, check-outs are not permitted after 8:00 pm.",
+      "Prohibited items: Weapons, sticks, and chemicals are not allowed at the prayer centre.",
+    ],
+  },
+  {
+    heading: "Conduct and Chapel Rules",
+    rules: [
+      "Noise levels: Please maintain silence in the rooms. This includes turning off radios and avoiding singing or speaking loudly to allow others to enjoy their quiet time.",
+      "Cleanliness: Always remember to keep the premises clean.",
+      "Dress code: A decent dress code is required on the mountain at all times.",
+      "Visitor policy: Do not invite visitors while on the prayer mountain. The sole purpose of your visit is personal prayer.",
+    ],
+  },
+  {
+    heading: "Spiritual and Ministry Guidelines",
+    rules: [
+      "Preaching: Preaching within the compound is strictly prohibited.",
+      "Prayer ministry: Inter-denominational prayer ministry is not permitted. Do not pray for others who are not of your same denomination.",
+    ],
+  },
+  {
+    heading: "Accommodation and Health",
+    rules: [
+      "Health and safety: We cannot accommodate sick guests. Please seek medical services if you are unwell.",
+      "Room sharing: Couples are not permitted to share a room.",
+      "Food restriction: No food is allowed on the prayer mountain.",
+    ],
+  },
+  {
+    heading: "Commerce",
+    rules: [
+      "Business activities: Selling items, supplements, or conducting any business is strictly prohibited on the mountain.",
+    ],
+  },
 ];
 
 const GALLERY_CATEGORIES = [
@@ -66,7 +97,7 @@ const GALLERY_CATEGORIES = [
   { id: "reception", label: "Reception" },
   { id: "regular", label: "Regular Rooms" },
   { id: "vip", label: "VIP Rooms" },
-  { id: "commissioning", label: "Commissioning" },
+  
 ];
 
 const GALLERY_IMAGES: Record<string, { url: string; alt: string }[]> = {
@@ -76,7 +107,7 @@ const GALLERY_IMAGES: Record<string, { url: string; alt: string }[]> = {
   ],
   reception: [
     { url: "/images/reception.jpg", alt: "Reception area" },
-    { url: "/images/reception02.jpg", alt: "Welcoming entrance" },
+    { url: "/images/reception002.jpg", alt: "Welcoming entrance" },
   ],
   regular: [
     { url: "/images/regular01.jpg", alt: "Regular prayer room" },
@@ -86,10 +117,7 @@ const GALLERY_IMAGES: Record<string, { url: string; alt: string }[]> = {
     { url: "/images/vip01.jpg", alt: "VIP prayer suite" },
     { url: "/images/vip02.jpg", alt: "Premium VIP room" },
   ],
-  commissioning: [
-    { url: "https://images.unsplash.com/photo-1532641422418-0418d1903a1d?w=600&h=400&fit=crop&auto=format", alt: "Commissioning service at sunset" },
-    { url: "https://images.unsplash.com/photo-1457139621581-298d1801c832?w=600&h=400&fit=crop&auto=format", alt: "Commissioning prayer gathering" },
-  ],
+
 };
 
 // --- Logo SVG ----------------------------------------------------------------
@@ -157,7 +185,7 @@ function Navbar({ darkMode, onToggleTheme }: { darkMode: boolean; onToggleTheme:
         </button>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-8">
           {NAV_LINKS.map((link) => (
             <button
               key={link.id}
@@ -191,7 +219,7 @@ function Navbar({ darkMode, onToggleTheme }: { darkMode: boolean; onToggleTheme:
 
           {/* Mobile toggle */}
           <button
-            className="md:hidden p-2 rounded"
+            className="lg:hidden p-2 rounded"
             style={{ color: scrolled ? "#000000" : "#FFFFFF" }}
             onClick={() => setOpen(!open)}
             aria-label="Toggle navigation"
@@ -204,7 +232,7 @@ function Navbar({ darkMode, onToggleTheme }: { darkMode: boolean; onToggleTheme:
       {/* Mobile menu */}
       {open && (
         <div
-          className="md:hidden border-t"
+          className="lg:hidden border-t"
           style={{ background: scrolled ? "rgba(40, 194, 68, 0.98)" : "rgba(0, 0, 0, 0.98)", borderColor: "rgba(0,0,0,0.2)" }}
         >
           {NAV_LINKS.map((link) => (
@@ -383,6 +411,7 @@ function AboutSection() {
               src="/images/prayercentre.jpg"
               alt="Green mountain hills at House of Prayer, Bungoma"
               className="w-full object-cover slow-zoom"
+              loading="lazy"
               style={{ aspectRatio: "4/3" }}
             />
           </div>
@@ -458,24 +487,42 @@ function AboutSection() {
             </h3>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {REGULATIONS.map((rule, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-3 p-4"
-                style={{ background: "#FFFFFF", borderRadius: "2px", border: "1px solid rgba(0,0,0,0.1)" }}
-              >
-                <span
-                  className="mt-1 text-xs font-bold shrink-0 w-5 h-5 flex items-center justify-center rounded-full"
-                  style={{ background: "#000000", color: "#9737BD", fontFamily: "'DM Sans', sans-serif" }}
+            {REGULATIONS.map((section) => (
+              <div key={section.heading} className="contents">
+                <h4
+                  className="sm:col-span-2 lg:col-span-3 text-lg mt-4 first:mt-0"
+                  style={{ fontFamily: "'Playfair Display', serif", color: "#000000", fontWeight: 600 }}
                 >
-                  {i + 1}
-                </span>
-                <p
-                  className="text-sm leading-relaxed"
-                  style={{ fontFamily: "'DM Sans', sans-serif", color: "#2B2B2B", lineHeight: 1.7 }}
-                >
-                  {rule}
-                </p>
+                  {section.heading}
+                </h4>
+                {section.rules.map((rule) => {
+                  const number = REGULATIONS
+                    .slice(0, REGULATIONS.indexOf(section))
+                    .reduce((total, previousSection) => total + previousSection.rules.length, 0)
+                    + section.rules.indexOf(rule)
+                    + 1;
+
+                  return (
+                    <div
+                      key={rule}
+                      className="flex items-start gap-3 p-4"
+                      style={{ background: "#FFFFFF", borderRadius: "2px", border: "1px solid rgba(0,0,0,0.1)" }}
+                    >
+                      <span
+                        className="mt-1 text-xs font-bold shrink-0 w-5 h-5 flex items-center justify-center rounded-full"
+                        style={{ background: "#000000", color: "#28C244", fontFamily: "'DM Sans', sans-serif" }}
+                      >
+                        {number}
+                      </span>
+                      <p
+                        className="text-sm leading-relaxed"
+                        style={{ fontFamily: "'DM Sans', sans-serif", color: "#2B2B2B", lineHeight: 1.7 }}
+                      >
+                        {rule}
+                      </p>
+                    </div>
+                  );
+                })}
               </div>
             ))}
           </div>
@@ -778,6 +825,7 @@ function GallerySection() {
                 src={img.url}
                 alt={img.alt}
                 className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
               />
             </div>
           ))}
