@@ -61,7 +61,7 @@ const REGULATIONS = [
     ],
   },
   {
-    heading: "Conduct and Chapel Rules",
+    heading: "Conduct and Etiquette",
     rules: [
       "Noise levels: Please maintain silence in the rooms. This includes turning off radios and avoiding singing or speaking loudly to allow others to enjoy their quiet time.",
       "Cleanliness: Always remember to keep the premises clean.",
@@ -162,7 +162,9 @@ function Navbar({ darkMode, onToggleTheme }: { darkMode: boolean; onToggleTheme:
     <header
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: scrolled ? "rgba(40, 194, 78, 0.97)" : "transparent",
+        background: darkMode
+          ? scrolled ? "rgba(24, 61, 24, 0.97)" : "#183d18"
+          : "rgba(40, 194, 78, 0.97)",
         backdropFilter: scrolled ? "blur(12px)" : "none",
         borderBottom: scrolled ? "1px solid rgba(0,0,0,0.2)" : "none",
       }}
@@ -324,7 +326,7 @@ function HeroSection() {
         <div className="mt-10 flex flex-wrap gap-4 justify-center">
           <button
             onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-8 py-3 text-sm tracking-widest uppercase transition-all duration-200 hover:scale-105"
+            className="hero-primary-cta px-8 py-3 text-sm tracking-widest uppercase transition-all duration-200 hover:scale-105"
             style={{
               fontFamily: "'DM Sans', sans-serif",
               background: "#9737BD",
@@ -659,7 +661,7 @@ function ServicesSection() {
           {SERVICES.map((s) => (
             <div
               key={s.tier}
-              className="relative flex flex-col p-8 transition-transform duration-200 hover:-translate-y-1"
+              className={`relative flex flex-col p-8 transition-transform duration-200 hover:-translate-y-1${s.highlight ? " vip-tier" : ""}`}
               style={{
                 background: s.highlight ? "#000000" : "#FFFFFF",
                 border: s.highlight ? "none" : "1px solid rgba(28,43,28,0.12)",
@@ -668,7 +670,7 @@ function ServicesSection() {
             >
               {s.highlight && (
                 <div
-                  className="absolute top-0 left-0 right-0 text-center py-1 text-xs tracking-widest uppercase"
+                  className="vip-tier-badge absolute top-0 left-0 right-0 text-center py-1 text-xs tracking-widest uppercase"
                   style={{
                     background: "#9737BD",
                     color: "#000000",
@@ -797,6 +799,7 @@ function GallerySection() {
             <button
               key={cat.id}
               onClick={() => setActiveTab(cat.id)}
+              data-active={activeTab === cat.id}
               className="px-4 py-2 text-xs tracking-widest uppercase transition-all duration-200"
               style={{
                 fontFamily: "'DM Sans', sans-serif",
@@ -1041,7 +1044,7 @@ function Footer() {
               className="text-sm leading-relaxed"
               style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(247,242,233,0.5)", lineHeight: 1.8 }}
             >
-              An interdenominational prayer destination at the Bungoma-Kakamega border, Kenya. Open daily 6am-8pm.
+              An <span className="inline-block whitespace-nowrap">interdenominational</span> prayer destination at the Bungoma-Kakamega border, Kenya. Open daily 6am-8pm.
             </p>
           </div>
 
